@@ -1,5 +1,5 @@
 from http.client import PRECONDITION_FAILED
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from datetime import datetime
 
 #Flask é um framework web
@@ -25,6 +25,29 @@ def cotacao():
     preco = 100
     total  =valor * preco
     return render_template("cotacao.html", valor=valor, preco=preco)
+
+@app.route("/conversao", methods=["GET","POST"])
+def converte():
+    if request.method =='GET':
+    #GET É O CASO QUANDO O USUARIO DIGITA A URL NO BROWSER
+     return render_template("conversao.html")
+    else:
+        valorDol = float(request.form.get("dolar"))
+        #TODO: pegar preço da cotação em:
+        valorReais = valorDol * 5.24
+
+    return render_template("conversao.html", valorReais = valorReais)
+
+@app.route("/imc", methods=["GET","POST"])
+def calculaImc():
+    if request.method =='GET':
+        return render_template("imc.html")
+    else:
+        peso = float(request.form.get("peso"))
+        altura = float(request.form.get("altura"))
+        imc = peso / (altura * altura)
+    return render_template("imc.html", imc = imc)
+
 
 
 if __name__ == "__main__":

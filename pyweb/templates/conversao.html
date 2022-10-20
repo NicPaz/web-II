@@ -8,9 +8,16 @@
 </head>
 <body>
     <main>
-        <span>A cotação atual é:<span>
-        <span>R$ {{valor}}</span> <br>
-        <span>Preço do produto:<input type="number"></span>
+
+      <form action="/conversao" method="POST">
+          <input name="dolar" placeholder="Digite o preço em dólar">
+          <input value="calcular" type="submit">
+      </form>  
+
+      <div>
+          R${{ valorReais}}
+      </div>
+      
     </main>
 </body>
 </html>
